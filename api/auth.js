@@ -24,6 +24,12 @@ async function signUp(name, email, password) {
   return data;
 }
 
+async function signIn(email, password){
+  const { data, error } = await supabase.auth.signInWithPassword({
+  email: email,
+  password: password,
+})
+}
 //sign out function
 async function signOut() {
   const { error } = await supabase.auth.signOut();

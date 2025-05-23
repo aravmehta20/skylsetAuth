@@ -3,7 +3,7 @@ const projectURL = "https://tgzfwhkjjkxwshupwdse.supabase.co";
 
 import { createClient } from '@supabase/supabase-js';
 
-const supabase = createClient(SUPABASE_URL, SERVICE_ROLE_KEY);
+const supabase = createClient(projectURL, serviceRoleKey);
 
 module.exports = async (req, res) => {
   const { name, email, password } = req.body;

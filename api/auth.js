@@ -1,7 +1,9 @@
-const anonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRnemZ3aGtqamt4d3NodXB3ZHNlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQzMDM2NDcsImV4cCI6MjA1OTg3OTY0N30.vIMKaY6llWcXPFoKcW7jAnVRcdBOTBACktUN-Mw9Rew";
+const serviceRoleKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRnemZ3aGtqamt4d3NodXB3ZHNlIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc0NDMwMzY0NywiZXhwIjoyMDU5ODc5NjQ3fQ.MRTSJM37ZMqG8ixq948xebNfRNc-koV-K3bsiMh2Dt0";
 const projectURL = "https://tgzfwhkjjkxwshupwdse.supabase.co";
 
-const supabase = window.supabase.createClient(projectURL, anonKey);
+const supabase = window.supabase.createClient(projectURL, serviceRoleKey);
+
+//sign up function
 async function signUp(name, email, password) {
   const { data, error } = await supabase.auth.signUp({
     email: email,
@@ -22,6 +24,7 @@ async function signUp(name, email, password) {
   return data;
 }
 
+//sign out function
 async function signOut() {
   const { error } = await supabase.auth.signOut();
   if (error) {
@@ -30,11 +33,14 @@ async function signOut() {
     console.log('User account deleted successfully')
   }
 }
+
+//reset password function
 async function resetPassword(){
 const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
   redirectTo: 'https://example.com/update-password',
 })
 }
+//delete account function
 async function deleteAccount() {
   //Retrieve current User
   const user = supabase.auth.user();
